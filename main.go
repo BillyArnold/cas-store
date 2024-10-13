@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"log"
+	"time"
 
 	"github.com/billyarnold/cas-store/p2p"
 )
@@ -35,6 +37,13 @@ func main() {
 	go func() {
 		log.Fatal(s1.Start())
 	}()
+	time.Sleep(1 * time.Second)
 
-	s2.Start()
+	go s2.Start()
+	time.Sleep(1 * time.Second)
+
+	data := bytes.NewReader([]byte("my big data file"))
+	s2.StoreData("key", data)
+
+	select {}
 }
