@@ -10,6 +10,7 @@ type Peer interface {
 
 // Transport is anything handling communication between network nodes
 type Transport interface {
+	Addr() string
 	Dial(string) error
 	ListenAndAccept() error
 	Consume() <-chan RPC

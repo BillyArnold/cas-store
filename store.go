@@ -143,7 +143,6 @@ func (s *Store) writeStream(key string, r io.Reader) (int64, error) {
 		return 0, err
 	}
 
-	pathAndFilename := pathKey.FullPath()
 	pathAndFilenameWithRoot := fmt.Sprintf("%s/%s", s.Root, pathKey.FullPath())
 
 	f, err := os.Create(pathAndFilenameWithRoot)
@@ -155,8 +154,6 @@ func (s *Store) writeStream(key string, r io.Reader) (int64, error) {
 	if err != nil {
 		return 0, err
 	}
-
-	log.Printf("written (%d) bytes to disk: %s", n, pathAndFilename)
 
 	return n, nil
 }

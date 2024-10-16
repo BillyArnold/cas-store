@@ -42,8 +42,23 @@ func main() {
 	go s2.Start()
 	time.Sleep(1 * time.Second)
 
-	data := bytes.NewReader([]byte("my big data file"))
-	s2.StoreData("key", data)
+	for i := 0; i < 10; i++ {
+		data := bytes.NewReader([]byte("my big data file"))
+		s2.Store("key", data)
+		time.Sleep(500 * time.Millisecond)
+	}
+
+	// r, err := s2.Get("key")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// b, err := io.ReadAll(r)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// fmt.Println(string(b))
 
 	select {}
 }
